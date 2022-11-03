@@ -66,6 +66,15 @@ void moveToPositionSmoothly(int posTo0, int posTo1) {  // , int posFrom0, int po
   }
 }
 
+// Moves the frontServo and the backServo to the "center" position
+void moveToCenterPosition() {
+  d0_sh = (1.0*MIN_POS + 1.0*MAX_POS)/2.0;
+  d1_sh = (1.0*MIN_POS + 1.0*MAX_POS)/2.0;  
+  frontServo.write(d0_sh);
+  backServo.write(d1_sh);
+}
+
+
 // setup runs once, when the sketch starts
 void setup() {
   // set sound pin
@@ -75,11 +84,8 @@ void setup() {
   frontServo.attach(9);
   backServo.attach(10);
   
-  // Initialize the starting position to be centered (previously random(MIN_POS, MAX_POS))
-  d0_sh = (1.0*MIN_POS + 1.0*MAX_POS)/2.0;
-  d1_sh = (1.0*MIN_POS + 1.0*MAX_POS)/2.0;
-  frontServo.write(d0_sh);
-  backServo.write(d1_sh);
+  // Initialize the starting position to be centered
+  moveToCenterPosition();
   Serial.println("Init done! Show begins in 5, 4, 3, 2, 1");
   delay(5000);
 }
